@@ -1,14 +1,10 @@
 'use strict';
 
-var React = require('react-native');
-var PropTypes = require('ReactPropTypes');
-var ReactNativeViewAttributes = require('ReactNativeViewAttributes');
-var createReactNativeComponentClass = require('createReactNativeComponentClass');
-var StyleSheet = require('StyleSheet');
-var NativeMethodsMixin = require('NativeMethodsMixin');
-var flattenStyle = require('flattenStyle');
 var merge = require('merge');
-var { View } = React;
+var React = require('react-native');
+var {View, ReactNativeViewAttributes, PropTypes, StyleSheet, NativeMethodsMixin, } = React;
+var {createReactNativeComponentClass, } = ReactNativeViewAttributes;
+var {flattenStyle, } = StyleSheet;
 
 var RNChartView = createReactNativeComponentClass({
     validAttributes: merge(ReactNativeViewAttributes.UIView, {
