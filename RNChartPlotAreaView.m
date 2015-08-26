@@ -97,14 +97,16 @@
     
     [self.layer addSublayer:fillLayer];
     [self.layers addObject:fillLayer];
-    
-    CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-    fillAnimation.duration = self.parentChartView.animationDuration;
-    fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    fillAnimation.fillMode = kCAFillModeForwards;
-    fillAnimation.fromValue = (id)noFill.CGPath;
-    fillAnimation.toValue = (id)fill.CGPath;
-    [fillLayer addAnimation:fillAnimation forKey:@"path"];
+
+    if (self.parentChartView.animate) {
+      CABasicAnimation *fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+      fillAnimation.duration = self.parentChartView.animationDuration;
+      fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+      fillAnimation.fillMode = kCAFillModeForwards;
+      fillAnimation.fromValue = (id)noFill.CGPath;
+      fillAnimation.toValue = (id)fill.CGPath;
+      [fillLayer addAnimation:fillAnimation forKey:@"path"];
+    }
   }
   
   CAShapeLayer *pathLayer = [CAShapeLayer layer];
@@ -118,21 +120,23 @@
   
   [self.layer addSublayer:pathLayer];
   [self.layers addObject:pathLayer];
-  
-  if ( fillColor) {
-    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-    pathAnimation.duration = self.parentChartView.animationDuration;
-    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    pathAnimation.fromValue = (__bridge id)(noPath.CGPath);
-    pathAnimation.toValue = (__bridge id)(path.CGPath);
-    [pathLayer addAnimation:pathAnimation forKey:@"path"];
-  } else {
-    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    pathAnimation.duration = self.parentChartView.animationDuration;
-    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    [pathLayer addAnimation:pathAnimation forKey:@"path"];
+
+  if (self.parentChartView.animate) {
+    if (fillColor) {
+      CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+      pathAnimation.duration = self.parentChartView.animationDuration;
+      pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+      pathAnimation.fromValue = (__bridge id)(noPath.CGPath);
+      pathAnimation.toValue = (__bridge id)(path.CGPath);
+      [pathLayer addAnimation:pathAnimation forKey:@"path"];
+    } else {
+      CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+      pathAnimation.duration = self.parentChartView.animationDuration;
+      pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+      pathAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+      pathAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+      [pathLayer addAnimation:pathAnimation forKey:@"path"];
+    }
   }
 }
 
@@ -172,16 +176,18 @@
     
     [self.layer addSublayer:fillLayer];
     [self.layers addObject:fillLayer];
-    
-    CABasicAnimation *barGraphFillAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
-    [barGraphFillAnimation setDuration:self.parentChartView.animationDuration];
-    
-    barGraphFillAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    barGraphFillAnimation.fromValue = [NSNumber numberWithFloat:.0f];
-    barGraphFillAnimation.removedOnCompletion = NO;
-    barGraphFillAnimation.fillMode = kCAFillModeForwards;
-    fillLayer.anchorPoint = CGPointMake(0.0f, 0.5f);
-    [fillLayer addAnimation:barGraphFillAnimation forKey:@"grow"];
+
+    if (self.parentChartView.animate) {
+      CABasicAnimation *barGraphFillAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
+      [barGraphFillAnimation setDuration:self.parentChartView.animationDuration];
+      
+      barGraphFillAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+      barGraphFillAnimation.fromValue = [NSNumber numberWithFloat:.0f];
+      barGraphFillAnimation.removedOnCompletion = NO;
+      barGraphFillAnimation.fillMode = kCAFillModeForwards;
+      fillLayer.anchorPoint = CGPointMake(0.0f, 0.5f);
+      [fillLayer addAnimation:barGraphFillAnimation forKey:@"grow"];
+    }
   }
   
 }

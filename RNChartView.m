@@ -175,6 +175,7 @@
   _showGrid = YES;
   _gridLineWidth = 0.5;
   _axisLineWidth = 1;
+  _animate = YES;
   _animationDuration = 0.5;
   _touchRadius = 5.0;
   

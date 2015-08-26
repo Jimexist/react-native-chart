@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger, RNChartField) {
 @property (nonatomic, assign) int verticalGridStep;
 
 // animation
+@property (nonatomic, assign) BOOL animate;
 @property (nonatomic, assign) CGFloat animationDuration;
 
 // touch
