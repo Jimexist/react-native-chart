@@ -14,6 +14,7 @@ var RNChartView = createReactNativeComponentClass({
     validAttributes: merge(ReactNativeViewAttributes.UIView, {
         chartData:true,
         verticalGridStep:true,
+        animate:true,
         animationDuration:true,
 
         showGrid:true,
