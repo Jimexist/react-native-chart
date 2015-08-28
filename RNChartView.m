@@ -122,6 +122,8 @@
   
   self.xAxisView = [[RNChartAxisView alloc] initWithParent:self axis:AxisTypeX];
   [self addSubview:self.xAxisView];
+  self.xAxisView.labelFont = self.labelFont;
+  self.xAxisView.labelTextColor = self.labelTextColor;
 
   self.yAxisView = [[RNChartAxisView alloc] initWithParent:self axis:AxisTypeY];
   [self addSubview:self.yAxisView];
